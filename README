@@ -1,0 +1,46 @@
+#ACCEDER AL SERVICIO DESDE EL NAVEGADOR IP-PRIVADA:PORTCONTAINER
+#EL CONTAINER VA SIN NOMBRE, YA QUE DOCKER STACK ASIGNA NOMBRE-CLUSTER.NOMBRE-SERVICIO.NUMERO-DOCKER
+#1º PRIMERO DEBES ASEGURAR QUE TU DOCKER SWARM ESTA INICIADO Y QUE TU NODO ES MANAGER.
+
+#Comandos docker stack
+#iniciar el cluster con los containers
+docker stack up --compose-file <COMPOSE-FILE.YAML> <NOMBRE-CLUSTER>
+
+#ELIMINAR CLUSTER
+docker stack rm <NOMBRE-CLUSTER>
+
+#LISTAR CONTAINERS
+docker stack service <NOMBRE-CLUSTER>
+#ejemplo
+ID             NAME               MODE         REPLICAS   IMAGE                          PORTS
+rfc86afzty39   testing_grafana8   replicated   0/1        grafana/grafana:8.4.2-ubuntu   *:3000->3000/tcp
+hvcxfswh6llz   testing_node       replicated   0/1        prom/node-exporter:v1.0.1      *:9100->9100/tcp
+av5o9t6bz5no   testing_prom       replicated   0/1        prom/prometheus:v2.33.4        *:9090->9090/tcp
+
+#LISTA LAS REPLICAS DE LOS CONTAINERS EN EL STACK
+docker stack ps testing 
+ID             NAME                 IMAGE                          NODE           DESIRED STATE   CURRENT STATE           ERROR     PORTS
+x3x1xnalqnsj   testing_grafana8.1   grafana/grafana:8.4.2-ubuntu   EXAMPLE-HOST    Running         Running 7 seconds ago             
+t2ms19ifxuhq   testing_node.1       prom/node-exporter:v1.0.1      EXAMPLE-HOST    Running         Running 3 seconds ago             
+tqmr82zy23ck   testing_prom.1       prom/prometheus:v2.33.4        EXAMPLE-HOST    Running         Running 8 seconds ago             
+b0kxzvji39ay   testing_prom.2       prom/prometheus:v2.33.4        EXAMPLE-HOST    Running         Running 8 seconds ago             
+3qn1sgm2qar0   testing_prom.3       prom/prometheus:v2.33.4        EXAMPLE-HOST    Running         Running 9 seconds ago             
+ybog9m3h2z3n   testing_prom.4       prom/prometheus:v2.33.4        EXAMPLE-HOST    Running         Running 9 seconds ago             
+6yphawost0qj   testing_prom.5       prom/prometheus:v2.33.4        EXAMPLE-HOST    Running         Running 7 seconds ago  
+ 
+#ACTUALIZA UN SOLO SERVICIO
+docker service update <NOMBRE-CLUSTER.NOMBRE-SERVICIO>
+#ejemplo output
+testing_prom
+overall progress: 1 out of 1 tasks 
+1/1: running   [==================================================>] 
+verify: Service converged 
+
+#TRAE INFO DEL NODE 
+docker info
+
+#MUESTRA INFO DE LOS NODOS EXISTENTES CON EL MANAGER
+docker node ls
+#ejemplo output
+ID                            HOSTNAME       STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+4gm767ugtcis4d1j3izlprl5o *   EXAMPLE-HOST   Ready     Active         Leader           23.0.1
