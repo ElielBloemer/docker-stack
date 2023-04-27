@@ -48,5 +48,5 @@ ID                            HOSTNAME       STATUS    AVAILABILITY   MANAGER ST
 
 
 #### OJOOOO!!! con grafana para actualizar el archivo grafana.ini
-docker service update --force <NOMBRE-SERVICE>
+docker service update --force <NOMBRE-CLUSTER>_<NOMBRE-SERVICIO>
 
