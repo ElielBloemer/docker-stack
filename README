@@ -45,3 +45,8 @@ docker node ls
 #ejemplo output
 ID                            HOSTNAME       STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
 4gm767ugtcis4d1j3izlprl5o *   EXAMPLE-HOST   Ready     Active         Leader           23.0.1
+
+
+#### OJOOOO!!! con grafana para actualizar el archivo grafana.ini
+docker service update --force <NOMBRE-SERVICE>
+
