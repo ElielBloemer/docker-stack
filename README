@@ -10,7 +10,7 @@ docker stack up --compose-file <COMPOSE-FILE.YAML> <NOMBRE-CLUSTER>
 docker stack rm <NOMBRE-CLUSTER>
 
 #LISTAR CONTAINERS
-docker stack service <NOMBRE-CLUSTER>
+docker stack services <NOMBRE-CLUSTER>
 #ejemplo
 ID             NAME               MODE         REPLICAS   IMAGE                          PORTS
 rfc86afzty39   testing_grafana8   replicated   0/1        grafana/grafana:8.4.2-ubuntu   *:3000->3000/tcp
