@@ -1,9 +1,9 @@
 #ACCEDER AL SERVICIO DESDE EL NAVEGADOR IP-PRIVADA:PORTCONTAINER
  comando para ver ip privada "hostname -I"
-#EL CONTAINER VA SIN NOMBRE, YA QUE DOCKER STACK ASIGNA NOMBRE-CLUSTER.NOMBRE-SERVICIO.NUMERO-DOCKER
+#EL CONTAINER VA SIN NOMBRE, YA QUE DOCKER SWARM ASIGNA NOMBRE-CLUSTER.NOMBRE-SERVICIO.NUMERO-DOCKER
 #1º PRIMERO DEBES ASEGURAR QUE TU DOCKER SWARM ESTA INICIADO Y QUE TU NODO ES MANAGER.
 
-#Comandos docker stack
+#Comandos docker swarm
 #iniciar el cluster con los containers
 docker stack up --compose-file <COMPOSE-FILE.YAML> <NOMBRE-CLUSTER>
 
@@ -18,7 +18,7 @@ rfc86afzty39   testing_grafana8   replicated   0/1        grafana/grafana:8.4.2-
 hvcxfswh6llz   testing_node       replicated   0/1        prom/node-exporter:v1.0.1      *:9100->9100/tcp
 av5o9t6bz5no   testing_prom       replicated   0/1        prom/prometheus:v2.33.4        *:9090->9090/tcp
 
-#LISTA LAS REPLICAS DE LOS CONTAINERS EN EL STACK
+#LISTA LAS REPLICAS DE LOS CONTAINERS EN EL CLUSTER
 docker stack ps testing 
 ID             NAME                 IMAGE                          NODE           DESIRED STATE   CURRENT STATE           ERROR     PORTS
 x3x1xnalqnsj   testing_grafana8.1   grafana/grafana:8.4.2-ubuntu   EXAMPLE-HOST    Running         Running 7 seconds ago             
